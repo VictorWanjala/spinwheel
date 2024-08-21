@@ -1,6 +1,7 @@
 const wheel = document.getElementById("wheel");
 const spinBtn = document.getElementById("spin-btn");
 const finalValue = document.getElementById("final-value");
+
 // Object that stores values of minimum and maximum angle for a value
 const rotationValues = [
   { minDegree: 0, maxDegree: 30, value: 2 },
@@ -11,27 +12,26 @@ const rotationValues = [
   { minDegree: 271, maxDegree: 330, value: 3 },
   { minDegree: 331, maxDegree: 360, value: 2 },
 ];
+
 // Size of each piece
 const data = [16, 16, 16, 16, 16, 16];
+
 // Background color for each piece
 var pieColors = [
- "#3C50E0", 
+  "#3C50E0", 
   "#2a3a7b", 
   "#4a5ee0", 
   "#1a2a4d", 
   "#3C50E0", 
   "#2a3a7b",
 ];
+
 // Create chart
 let myChart = new Chart(wheel, {
-  // Plugin for displaying text on pie chart
   plugins: [ChartDataLabels],
-  // Chart Type Pie
   type: "pie",
   data: {
-    // Labels (values which are to be displayed on chart)
     labels: [], // Empty labels
-    // Settings for dataset/pie
     datasets: [
       {
         backgroundColor: pieColors,
@@ -40,27 +40,25 @@ let myChart = new Chart(wheel, {
     ],
   },
   options: {
-    // Responsive chart
     responsive: true,
     animation: { duration: 0 },
     plugins: {
-      // Hide tooltip and legend
       tooltip: false,
       legend: {
         display: false,
       },
-      // Hide labels inside pie chart
       datalabels: {
         display: false,
       },
     },
   },
 });
+
 // Display value based on the randomAngle
 const valueGenerator = (angleValue) => {
   const randomWinningNumber = Math.floor(Math.random() * 70) + 1; // Generate a random number between 1 and 70
   finalValue.innerHTML = `<p>Winning Number: ${randomWinningNumber}</p>`;
-  spinBtn.disabled = false;
+  spinBtn.disabled = true; // Permanently disable the spin button after one spin
 };
 
 // Spinner count
@@ -77,11 +75,8 @@ spinBtn.addEventListener("click", () => {
   // Interval for rotation animation
   let rotationInterval = window.setInterval(() => {
     // Set rotation for piechart
-    /*
-    Initially to make the piechart rotate faster we set resultValue to 101 so it rotates 101 degrees at a time and this reduces by 1 with every count. Eventually on last rotation we rotate by 1 degree at a time.
-    */
     myChart.options.rotation = myChart.options.rotation + resultValue;
-    // Update chart with new value;
+    // Update chart with new value
     myChart.update();
     // If rotation > 360 reset it back to 0
     if (myChart.options.rotation >= 360) {

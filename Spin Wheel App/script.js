@@ -54,17 +54,36 @@ let myChart = new Chart(wheel, {
   },
 });
 
-// Display value based on the randomAngle
-const valueGenerator = (angleValue) => {
-  const randomWinningNumber = Math.floor(Math.random() * 51) + 1;
+// Array to store used winning numbers
+let usedWinningNumbers = [];
+
+// Function to generate a unique winning number
+const valueGenerator = () => {
+  // Generate an array of available numbers by excluding used numbers
+  let availableNumbers = Array.from({ length: 51 }, (_, i) => i + 1).filter(n => !usedWinningNumbers.includes(n));
+
+  // If all numbers have been used, reset the set and allow repeats
+  if (availableNumbers.length === 0) {
+    usedWinningNumbers = [];
+    availableNumbers = Array.from({ length: 51 }, (_, i) => i + 1);
+  }
+
+  // Generate a unique winning number from available numbers
+  let randomIndex = Math.floor(Math.random() * availableNumbers.length);
+  let randomWinningNumber = availableNumbers[randomIndex];
+
+  // Add the new winning number to the set of used numbers
+  usedWinningNumbers.push(randomWinningNumber);
+
+  // Display the winning number
   finalValue.innerHTML = `<p>Winning Number: ${randomWinningNumber}</p>`;
-  spinBtn.disabled = true; // Permanently disable the spin button after one spin
 };
 
 // Spinner count
 let count = 0;
 // 100 rotations for animation and last rotation for result
 let resultValue = 101;
+
 // Start spinning
 spinBtn.addEventListener("click", () => {
   spinBtn.disabled = true;
@@ -84,10 +103,13 @@ spinBtn.addEventListener("click", () => {
       resultValue -= 5;
       myChart.options.rotation = 0;
     } else if (count > 15 && myChart.options.rotation == randomDegree) {
-      valueGenerator(randomDegree);
+      valueGenerator();
       clearInterval(rotationInterval);
       count = 0;
       resultValue = 101;
+      // Re-enable the spin button for the next spin
+      spinBtn.disabled = false;
     }
   }, 10);
 });
+

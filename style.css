@@ -1,0 +1,124 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #dbe0ff, #3C50E0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  width: 90%;
+  max-width: 34.37em;
+  max-height: 90vh;
+  background-color: #ffffff;
+  padding: 2em;
+  border-radius: 1em;
+  box-shadow: 0 4px 8px rgba(27, 8, 53, 0.2);
+  position: relative;
+  text-align: center;
+}
+
+header {
+  margin-bottom: 2em;
+}
+
+header h1 {
+  font-size: 2em;
+  color: #3C50E0;
+  margin-bottom: 0.5em;
+}
+
+header p {
+  font-size: 1.2em;
+  color: #5e5e5e;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+#wheel {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(27, 8, 53, 0.2);
+}
+
+#spin-btn {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 0;
+  background: radial-gradient(#3C50E0 50%, #2a3a7b 85%);
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(27, 8, 53, 0.2);
+}
+
+#spin-btn:hover {
+  background: radial-gradient(#2a3a7b 50%, #1a2a4d 85%);
+}
+
+img {
+  position: absolute;
+  width: 60px;
+  top: 40%;
+  right: -15%;
+}
+
+
+#final-value {
+  font-size: 1.5em; /* Larger font size for emphasis */
+  text-align: center;
+  margin-top: 1em;
+  color: #3C50E0; /* AfyaTrail theme color */
+  font-weight: 700; /* Bold font weight for prominence */
+  letter-spacing: 0.1em; /* Slightly increased letter spacing */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Shadow for better readability */
+  transition: transform 0.3s ease-in-out; /* Smooth scaling effect on hover */
+}
+
+#final-value p {
+  margin: 0;
+}
+
+#final-value:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    font-size: 14px;
+    padding: 2em;
+  }
+  #spin-btn {
+    height: 50px;
+    width: 50px;
+    font-size: 1em;
+  }
+  img {
+    width: 50px;
+    right: -10%;
+  }
+}
+

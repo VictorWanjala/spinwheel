@@ -54,8 +54,8 @@ let myChart = new Chart(wheel, {
   },
 });
 
-// Array to store used winning numbers
-let usedWinningNumbers = [];
+// Load stored winning numbers from localStorage, if available
+let usedWinningNumbers = JSON.parse(localStorage.getItem('usedWinningNumbers')) || [];
 
 // Function to generate a unique winning number
 const valueGenerator = () => {
@@ -74,6 +74,7 @@ const valueGenerator = () => {
 
   // Add the new winning number to the set of used numbers
   usedWinningNumbers.push(randomWinningNumber);
+  localStorage.setItem('usedWinningNumbers', JSON.stringify(usedWinningNumbers));
 
   // Display the winning number
   finalValue.innerHTML = `<p>Winning Number: ${randomWinningNumber}</p>`;

@@ -110,7 +110,7 @@ spinBtn.addEventListener("click", () => {
       count = 0;
       resultValue = 101;
       // Re-enable the spin button for the next spin only if there are numbers left
-      if (usedWinningNumbers.length < 51) {
+      if (usedWinningNumbers.length < 50) {
         spinBtn.disabled = false;
       }
     }

@@ -84,7 +84,7 @@ const valueGenerator = () => {
 // Spinner count
 let count = 0;
 // 100 rotations for animation and last rotation for result
-let resultValue = 101;
+let resultValue = 51;
 
 // Start spinning
 spinBtn.addEventListener("click", () => {
@@ -110,11 +110,13 @@ spinBtn.addEventListener("click", () => {
       count = 0;
       resultValue = 101;
       // Re-enable the spin button for the next spin only if there are numbers left
-      if (JSON.parse(localStorage.getItem('usedWinningNumbers')).length < 51) {
+      if (usedWinningNumbers.length < 51) {
         spinBtn.disabled = false;
       }
     }
   }, 10);
 });
+
+
 
 

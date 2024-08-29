@@ -62,10 +62,11 @@ const valueGenerator = () => {
   // Generate an array of available numbers by excluding used numbers
   let availableNumbers = Array.from({ length: 51 }, (_, i) => i + 1).filter(n => !usedWinningNumbers.includes(n));
 
-  // If all numbers have been used, reset the set and allow repeats
+  // If all numbers have been used, disable further spins
   if (availableNumbers.length === 0) {
-    usedWinningNumbers = [];
-    availableNumbers = Array.from({ length: 51 }, (_, i) => i + 1);
+    finalValue.innerHTML = `<p>All numbers have been used. No more spins are available.</p>`;
+    spinBtn.disabled = true;
+    return;
   }
 
   // Generate a unique winning number from available numbers
@@ -108,8 +109,10 @@ spinBtn.addEventListener("click", () => {
       clearInterval(rotationInterval);
       count = 0;
       resultValue = 101;
-      // Re-enable the spin button for the next spin
-      spinBtn.disabled = false;
+      // Re-enable the spin button for the next spin only if there are numbers left
+      if (JSON.parse(localStorage.getItem('usedWinningNumbers')).length < 51) {
+        spinBtn.disabled = false;
+      }
     }
   }, 10);
 });
